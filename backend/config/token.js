@@ -1,50 +1,44 @@
-import * as jwt from "jsonwebtoken"
+import * as jwt from 'jsonwebtoken'
+import process from 'node:process'
 
-const decodeToken = (token) =>{
-        return new Promise((resolve,reject) => {
-            jwt.verify(token,process.env.JWT_SECRET,(err,decoded)=>{
-                if(err) throw err
-                else resolve(decoded)
-            })
+const decodeToken = (token) => {
+    return new Promise((resolve, reject) => {
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+            if (err) reject(err)
+            else resolve(decoded)
         })
+    })
 }
 
-const accessToken = (userName,idx,userId)=>{
-    try{
-        const token = jwt.sign({
-            Idx : idx,
-            userName : userName,
-            userId : userId
+const accessToken = (userName, idx, userId) => {
+    const token = jwt.sign(
+        {
+            Idx: idx,
+            userName: userName,
+            userId: userId,
         },
         process.env.JWT_SECRET,
         {
-            issuer : userName,
-            expiresIn : '6h',
-        })
-        return token
-
-    }
-    catch(err){
-        throw err
-    }
+            issuer: userName,
+            expiresIn: '6h',
+        }
+    )
+    return token
 }
-const refreshToken = (userName,idx,userId)=>{
-    try{
-        const token = jwt.sign({
-            Idx : idx,
-            userName : userName,
-            userId : userId
+const refreshToken = (userName, idx, userId) => {
+    const token = jwt.sign(
+        {
+            Idx: idx,
+            userName: userName,
+            userId: userId,
         },
         process.env.JWT_REFRESH,
         {
-            issuer : userName,
-            expiresIn : '365d',
-        })
-        return token
-    }
-    catch(err){
-        throw(err)
-    }
+            issuer: userName,
+            expiresIn: '365d',
+        }
+    )
+    return token
 }
 
-export {accessToken, decodeToken, refreshToken}
+export { accessToken, decodeToken, refreshToken }
