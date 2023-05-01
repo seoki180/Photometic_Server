@@ -21,7 +21,6 @@ export default class AuthService {
                         access: accessToken,
                         refresh: refreshToken,
                     }
-
                     return response(baseResponse.AUTH_LOGIN_SUCCESS, jwt)
                 }
                 return errResponse(baseResponse.AUTH_LOGIN_WRONGPASSWORD)

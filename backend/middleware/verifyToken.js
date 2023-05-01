@@ -1,6 +1,5 @@
-// const dotenv = require("dotenv")
 import * as token from '../config/token'
-import baseResponse from '../config/baseResponse'
+import * as baseResponse from '../config/baseResponse'
 import { errResponse } from '../config/response'
 
 const verifyToken = async (req, res, next) => {

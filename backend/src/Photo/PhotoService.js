@@ -9,9 +9,9 @@ export default class PhotoService {
         try {
             const photos = await PhotoProvider.selectPhotosQuery(idx)
             if (photos.length != 0) {
-                return response(baseResponse.USER_PHOTOS_SUCCESS, photos)
+                return response(baseResponse.PHOTO_INFO_SUCCESS, photos)
             }
-            return errResponse(baseResponse.USER_PHOTOS_ERROR)
+            return errResponse(baseResponse.PHOTO_INFO_ERROR)
         } catch (err) {
             console.log(err)
             return errResponse(baseResponse.DB_ERROR)
@@ -26,9 +26,9 @@ export default class PhotoService {
 
             const upload = await PhotoProvider.insertPhotoQuery(idx, photoUrl, photoSize, photoName)
             if (upload.length != 0) {
-                return response(baseResponse.USER_UPLOAD_SUCCESS)
+                return response(baseResponse.PHOTO_UPLOAD_SUCCESS)
             }
-            return errResponse(baseResponse.USER_UPLOAD_ERROR)
+            return errResponse(baseResponse.PHOTO_UPLOAD_ERROR)
         } catch (err) {
             console.log(err)
             return errResponse(baseResponse.DB_ERROR)

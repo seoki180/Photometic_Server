@@ -1,5 +1,4 @@
 import PhotoService from './PhotoService'
-// import { deleteObjcet } from '../../config/aws/deleteObjcet'
 import { errResponse } from '../../config/response'
 import * as baseResponse from '../../config/baseResponse'
 
@@ -20,10 +19,10 @@ export default class PhotoController {
             const idx = req.decoded.Idx
             const photo = req.file
 
-            console.log(photo)
-
             const upload = await PhotoService.uploadService(idx, photo)
             const code = upload['code']
+
+            console.log(upload)
 
             return res.status(code).json(upload)
         }
@@ -33,7 +32,7 @@ export default class PhotoController {
     static async delete(req, res) {
         if (req.decoded && req.params) {
             const idx = req.params.id //Photo index
-            const id = req.decoded.Idx //user id
+            const id = req.decoded.Idx // user id
 
             const deleted = await PhotoService.deletePhoto(idx, id)
             const code = deleted['code']

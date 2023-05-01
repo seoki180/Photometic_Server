@@ -1,5 +1,5 @@
-import { createPool } from 'mysql2'
 import process from 'node:process'
+import { createPool } from 'mysql2'
 import { config } from 'dotenv'
 
 config('../.env')
