@@ -15,13 +15,13 @@ export default class PhotoService {
         }
     }
 
-    static async uploadService(idx, photo) {
+    static async uploadService(idx, photo, uploadDate, photoDate) {
         try {
             const photoUrl = photo.path || photo.location
             const photoSize = photo.size
             const photoName = photo.originalname
 
-            const upload = await PhotoProvider.insertPhotoQuery(idx, photoUrl, photoSize, photoName)
+            const upload = await PhotoProvider.insertPhotoQuery(idx, photoUrl, photoSize, photoName, uploadDate, photoDate)
             if (upload.length != 0) {
                 return response(baseResponse.PHOTO_UPLOAD_SUCCESS)
             }

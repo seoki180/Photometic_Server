@@ -1,11 +1,11 @@
 import db from '../../config/database'
 
 export default class PhotoProvider {
-    static async insertPhotoQuery(idx, photoUrl, photoSize, photoName) {
-        const sql = `insert into Photos(user_id,photoUrl,photoName,photoSize) value(?,?,?,?)`
+    static async insertPhotoQuery(idx, photoUrl, photoSize, photoName, uploadDate, photoDate) {
+        const sql = `insert into Photos(user_id,photoUrl,photoName,photoSize,uploadDate,photoDate) value(?,?,?,?,?,?)`
 
         return new Promise((resolve, reject) => {
-            db.query(sql, [idx, photoUrl, photoName, photoSize], (err, data) => {
+            db.query(sql, [idx, photoUrl, photoName, photoSize, uploadDate, photoDate], (err, data) => {
                 if (err) reject(err)
                 else resolve(data)
             })

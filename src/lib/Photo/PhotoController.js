@@ -18,8 +18,10 @@ export default class PhotoController {
         if (req.decoded && req.file) {
             const idx = req.decoded.Idx
             const photo = req.file
+            const photoDate = req.body.photoDate
+            const uploadDate = req.body.uploadDate
 
-            const upload = await PhotoService.uploadService(idx, photo)
+            const upload = await PhotoService.uploadService(idx, photo, uploadDate, photoDate)
             const code = upload['code']
 
             return res.status(code).json(upload)
